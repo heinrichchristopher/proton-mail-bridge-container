@@ -1,0 +1,47 @@
+name: Build & Push
+
+on:
+  schedule:
+    - cron: "0 3 * * 1"      # jeden Montag 03:00 UTC: Base-Image-Patches
+  workflow_dispatch:          # manuell / vom check-release-Workflow
+  push:
+    branches: [main]
+    paths: [Dockerfile, entrypoint.sh, VERSION, .github/workflows/build.yml]
+
+permissions:
+  contents: read
+  packages: write
+
+env:
+  IMAGE: ghcr.io/heinrichchristopher/proton-mail-bridge
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Read Bridge version
+        id: v
+        run: echo "version=$(tr -d '[:space:]' < VERSION)" >> "$GITHUB_OUTPUT"
+
+      - uses: docker/setup-qemu-action@v3
+      - uses: docker/setup-buildx-action@v3
+
+      - uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: docker/build-push-action@v6
+        with:
+          context: .
+          platforms: linux/amd64
+          pull: true          # frisches Base-Image
+          no-cache: true      # apt-Updates wirklich mitnehmen
+          push: true
+          build-args: BRIDGE_VERSION=${{ steps.v.outputs.version }}
+          tags: |
+            ${{ env.IMAGE }}:latest
+            ${{ env.IMAGE }}:${{ steps.v.outputs.version }}
