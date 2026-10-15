@@ -7,7 +7,8 @@
   <Shell>bash</Shell>
   <Privileged>false</Privileged>
   <Support>https://github.com/heinrichchristopher/proton-mail-bridge-container/issues</Support>
-  <Overview>Proton Mail Bridge, lauscht auf 0.0.0.0 (SMTP 2025, IMAP 2143). Erst-Login siehe README.</Overview>
+  <Overview>Proton Mail Bridge, lauscht auf 0.0.0.0 (SMTP 2025, IMAP 2143). Erst-Login siehe README im GitHub-Repo.</Overview>
+  <Icon>https://raw.githubusercontent.com/heinrichchristopher/proton-mail-bridge-container/main/logo.png</Icon>
   <Category>Network:Other</Category>
   <Config Name="SMTP" Target="2025" Default="2025" Mode="tcp" Description="SMTP" Type="Port" Display="always" Required="true">2025</Config>
   <Config Name="IMAP" Target="2143" Default="2143" Mode="tcp" Description="IMAP" Type="Port" Display="always" Required="true">2143</Config>
