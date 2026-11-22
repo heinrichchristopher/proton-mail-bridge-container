@@ -92,6 +92,10 @@ Die Bridge ist über `0.0.0.0` für alle Geräte im Netzwerk erreichbar, geschü
 | [`check-release.yml`](.github/workflows/check-release.yml) | alle 6 Stunden | Vergleicht das neueste Release von [ProtonMail/proton-bridge](https://github.com/ProtonMail/proton-bridge) mit `VERSION`; bei neuer Version: Bump, Tag, Release, Build anstoßen |
 | [`build.yml`](.github/workflows/build.yml) | Push, montags, manuell | Baut und pusht das Image nach GHCR (ohne Cache, mit frischem Base-Image) |
 
+## Lizenz
+
+Der Code dieses Repositories (Dockerfile, Entrypoint, Workflows, Unraid-Template) steht unter der [MIT-Lizenz](LICENSE). Die enthaltene Proton Mail Bridge unterliegt der Lizenz von Proton und ist davon nicht betroffen.
+
 ## Hinweise
 
 - Die Bridge-Software gehört Proton AG. Dieses Projekt ist **inoffiziell** und nicht mit Proton verbunden. Name und Logo sind Marken der Proton AG.
